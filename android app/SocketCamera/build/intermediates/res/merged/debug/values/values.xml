@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/E:/Users/l/OneDrive/Study/Racing%20cars/3C/1/SocketCamera/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">手机在线视频传输</string>
+    <string name="hello">Hello World, SocketCameraActivity!</string>
+</resources>
