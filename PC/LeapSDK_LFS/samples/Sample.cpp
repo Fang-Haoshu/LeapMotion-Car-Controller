@@ -1,4 +1,3 @@
-//#include<Windows.h>
 #include <cstring>
 #include "Leap.h"
 #include "stdio.h"   
@@ -122,20 +121,29 @@ void SampleListener::onFrame(const Controller& controller) {
   ServerAddr.sin_port = htons(Port);
   printf("waiting   connect....\n");
   int num = connect(NewConnection, (SOCKADDR   *)&ServerAddr, sizeof(SOCKADDR_IN));
-
+  
+  //Gets the position of my hand
   HandList hands = frame.hands();
   for (HandList::const_iterator hl = hands.begin(); hl != hands.end(); ++hl) {
     // Get the first hand
     const Hand hand = *hl;
     std::string handType = hand.isLeft() ? "Left hand" : "Right hand";
-    //std::cout << std::string(2, ' ') << handType << ", id: " << hand.id()
-    //          << ", palm position: " << hand.palmPosition() << std::endl;
-	//std::cout << ", palm position: " << hand.palmPosition() << std::endl;
 	//::SetCursorPos((hand.palmPosition()[0]) * 4 + 620, 600-hand.palmPosition()[1]*1.2);
-	if (hand.palmPosition()[2]<-50)
+	if (hand.palmPosition()[0]<-50)
+	{
+		num = send(NewConnection, "r\n", 4, 0);
+		printf("%d %s\n", num, "r");
+
+	}
+	else if (hand.palmPosition()[2]>50)
+	{
+		printf("%s\n", "l");
+		num = send(NewConnection, "l\n", 4, 0);
+	}
+	else if (hand.palmPosition()[2]<-50)
 	{
 		num = send(NewConnection, "b\n", 4, 0);
-		printf("%d\n", num);
+		printf("%d %s\n", num, "b");
 		
 	}
 	else if (hand.palmPosition()[2]>50)
@@ -143,52 +151,11 @@ void SampleListener::onFrame(const Controller& controller) {
 		printf("%s\n", "f");
 		num = send(NewConnection, "f\n", 4, 0);
 	}
-	else
-	{
-		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-		mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
-	}
-    // Get the hand's normal vector and direction
-    const Vector normal = hand.palmNormal();
-    const Vector direction = hand.direction();
-	closesocket(NewConnection);
-
-    // Calculate the hand's pitch, roll, and yaw angles
-    //std::cout << std::string(2, ' ') <<  "pitch: " << direction.pitch() * RAD_TO_DEG << " degrees, "
-    //          << "roll: " << normal.roll() * RAD_TO_DEG << " degrees, "
-    //          << "yaw: " << direction.yaw() * RAD_TO_DEG << " degrees" << std::endl;
-
-    // Get the Arm bone
-    Arm arm = hand.arm();
-    //std::cout << std::string(2, ' ') <<  "Arm direction: " << arm.direction()
-    //          << " wrist position: " << arm.wristPosition()
-    //          << " elbow position: " << arm.elbowPosition() << std::endl;
-
-    // Get fingers
-    const FingerList fingers = hand.fingers();
-    for (FingerList::const_iterator fl = fingers.begin(); fl != fingers.end(); ++fl) {
-      const Finger finger = *fl;
-      /*std::cout << std::string(4, ' ') <<  fingerNames[finger.type()]
-                << " finger, id: " << finger.id()
-                << ", length: " << finger.length()
-                << "mm, width: " << finger.width() << std::endl;*/
-
-      // Get finger bones
-      for (int b = 0; b < 4; ++b) {
-        Bone::Type boneType = static_cast<Bone::Type>(b);
-        Bone bone = finger.bone(boneType);
-        /*std::cout << std::string(6, ' ') <<  boneNames[boneType]
-                  << " bone, start: " << bone.prevJoint()
-                  << ", end: " << bone.nextJoint()
-                  << ", direction: " << bone.direction() << std::endl;*/
-      }
-    }
   }
 
   if (!frame.hands().isEmpty() ) {
     std::cout << std::endl;
   }
-
 }
 
 void SampleListener::onFocusGained(const Controller& controller) {
@@ -222,8 +189,6 @@ int main(int argc, char** argv) {
 	HANDLE hThread = CreateThread(NULL, 0, Fun, NULL, 0, NULL);
 	CloseHandle(hThread);
 
-
-
   // Create a sample listener and controller
   SampleListener listener;
   Controller controller;
@@ -235,9 +200,6 @@ int main(int argc, char** argv) {
   // Have the sample listener receive events from the controller
   controller.addListener(listener);
   controller.setPolicy(Leap::Controller::POLICY_BACKGROUND_FRAMES);
-  /*if (argc > 1 && strcmp(argv[1], "--bg") == 0)
-    controller.setPolicy(Leap::Controller::POLICY_BACKGROUND_FRAMES);*/
-
   controller.config().setInt32("background_app_mode", 2);
   controller.config().save();
 

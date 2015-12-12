@@ -1,4 +1,4 @@
-﻿生成启动时间为 12/12/2015 7:15:25 PM。
+﻿生成启动时间为 12/12/2015 7:49:30 PM。
      1>项目“F:\Git\Leap-Motion-Android-Communication-by-Socket\PC\LeapSDK_LFS\samples\SampleVS2012.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\include /I"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include" /I"C:\Program Files (x86)\OpenCV\opencv\build\include\opencv" /I"C:\Program Files (x86)\OpenCV\opencv\build\include\opencv2" /I"C:\Program Files (x86)\OpenCV\opencv\build\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Sample.cpp
@@ -7,12 +7,12 @@
                  c:\program files (x86)\windows kits\8.1\include\shared\sal.h(2886) : 参见“__useHeader”的前一个定义
      1>c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: “__on_failure”: 宏重定义
                  c:\program files (x86)\windows kits\8.1\include\shared\sal.h(2896) : 参见“__on_failure”的前一个定义
-     1>f:\git\leap-motion-android-communication-by-socket\pc\leapsdk_lfs\samples\sample.cpp(43): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>f:\git\leap-motion-android-communication-by-socket\pc\leapsdk_lfs\samples\sample.cpp(42): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : 参见“fopen”的声明
-     1>f:\git\leap-motion-android-communication-by-socket\pc\leapsdk_lfs\samples\sample.cpp(21): warning C4101: “recvbytes”: 未引用的局部变量
-     1>f:\git\leap-motion-android-communication-by-socket\pc\leapsdk_lfs\samples\sample.cpp(20): warning C4101: “buf”: 未引用的局部变量
-     1>f:\git\leap-motion-android-communication-by-socket\pc\leapsdk_lfs\samples\sample.cpp(114): warning C4101: “recvbytes”: 未引用的局部变量
-     1>f:\git\leap-motion-android-communication-by-socket\pc\leapsdk_lfs\samples\sample.cpp(113): warning C4101: “buf”: 未引用的局部变量
+     1>f:\git\leap-motion-android-communication-by-socket\pc\leapsdk_lfs\samples\sample.cpp(20): warning C4101: “recvbytes”: 未引用的局部变量
+     1>f:\git\leap-motion-android-communication-by-socket\pc\leapsdk_lfs\samples\sample.cpp(19): warning C4101: “buf”: 未引用的局部变量
+     1>f:\git\leap-motion-android-communication-by-socket\pc\leapsdk_lfs\samples\sample.cpp(113): warning C4101: “recvbytes”: 未引用的局部变量
+     1>f:\git\leap-motion-android-communication-by-socket\pc\leapsdk_lfs\samples\sample.cpp(112): warning C4101: “buf”: 未引用的局部变量
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Git\Leap-Motion-Android-Communication-by-Socket\PC\LeapSDK_LFS\samples\Debug\Sample.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\lib\x86 /LIBPATH:"C:\Program Files (x86)\OpenCV\opencv\build\x86\vc10\lib" Leap.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opencv_highgui2410d.lib opencv_core2410d.lib opencv_imgproc2410d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Git\Leap-Motion-Android-Communication-by-Socket\PC\LeapSDK_LFS\samples\Debug\Sample.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Git\Leap-Motion-Android-Communication-by-Socket\PC\LeapSDK_LFS\samples\Debug\Sample.lib" /MACHINE:X86 Debug\Sample.obj
          SampleVS2012.vcxproj -> F:\Git\Leap-Motion-Android-Communication-by-Socket\PC\LeapSDK_LFS\samples\Debug\Sample.exe
@@ -24,4 +24,4 @@
 
 生成成功。
 
-已用时间 00:00:02.17
+已用时间 00:00:01.83
