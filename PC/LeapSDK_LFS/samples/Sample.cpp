@@ -62,6 +62,89 @@ DWORD WINAPI Fun(LPVOID lpParamter)
 	}
 }
 
+
+DWORD WINAPI Send(LPVOID lpParamter)
+{
+	// Get the most recent frame and report some basic information
+	Sleep(100);
+	char history = 0;
+	Controller* controller = (Controller*)lpParamter;
+	//Socket
+	WSADATA   wsaData;
+	char   buf[1024];
+	int   nBytes = 1024, recvbytes;
+	SOCKET   NewConnection;
+	SOCKADDR_IN   ServerAddr;
+	int   Port = 8888;
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
+	NewConnection = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	ServerAddr.sin_family = AF_INET;
+	ServerAddr.sin_addr.s_addr = inet_addr("10.187.58.140 ");//手机ip地址
+	ServerAddr.sin_port = htons(Port);
+	printf("waiting   connect....\n");
+	int num = connect(NewConnection, (SOCKADDR   *)&ServerAddr, sizeof(SOCKADDR_IN));
+	printf("%d", num);
+	while (1){
+		const Frame frame = controller->frame();
+		//Gets the position of my hand
+		HandList hands = frame.hands();
+		for (HandList::const_iterator hl = hands.begin(); hl != hands.end(); ++hl) {
+			// Get the first hand
+			const Hand hand = *hl;
+			std::string handType = hand.isLeft() ? "Left hand" : "Right hand";
+			//::SetCursorPos((hand.palmPosition()[0]) * 4 + 620, 600-hand.palmPosition()[1]*1.2);
+			if (hand.palmPosition()[0]<-50)
+			{
+				if (history != 'r')
+				{
+					num = send(NewConnection, "r\n", 4, 0);
+					printf("%d %s\n", num, "r");
+				}
+				history = 'r';
+			}
+			else if (hand.palmPosition()[0]>50)
+			{
+				if (history != 'l')
+				{
+					printf("%s\n", "l");
+					num = send(NewConnection, "l\n", 4, 0);
+				}
+				history = 'l';
+			}
+			else if (hand.palmPosition()[2]<-50)
+			{
+				if (history != 'b')
+				{
+					num = send(NewConnection, "b\n", 4, 0);
+					printf("%d %s\n", num, "b");
+				}
+				history = 'b';
+
+			}
+			else if (hand.palmPosition()[2]>50)
+			{
+				if (history != 'f')
+				{
+					printf("%s\n", "f");
+					num = send(NewConnection, "f\n", 4, 0);
+				}
+				history = 'f';
+			}
+			else
+			{
+				if (history != 's')
+				{
+					printf("%s\n", "s");
+					num = send(NewConnection, "s\n", 4, 0);
+				}
+				history = 's';
+			}
+		}
+	}
+	return 0;
+}
+
+
 class SampleListener : public Listener {
   public:
     virtual void onInit(const Controller&);
@@ -106,56 +189,56 @@ void SampleListener::onExit(const Controller& controller) {
 
 void SampleListener::onFrame(const Controller& controller) {
   // Get the most recent frame and report some basic information
-  const Frame frame = controller.frame();
-  //Socket
-  WSADATA   wsaData;
-  char   buf[1024];
-  int   nBytes = 1024, recvbytes;
-  SOCKET   NewConnection;
-  SOCKADDR_IN   ServerAddr;
-  int   Port = 8888;
-  WSAStartup(MAKEWORD(2, 2), &wsaData);
-  NewConnection = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-  ServerAddr.sin_family = AF_INET;
-  ServerAddr.sin_addr.s_addr = inet_addr("192.168.1.110 ");//手机ip地址
-  ServerAddr.sin_port = htons(Port);
-  printf("waiting   connect....\n");
-  int num = connect(NewConnection, (SOCKADDR   *)&ServerAddr, sizeof(SOCKADDR_IN));
-  
-  //Gets the position of my hand
-  HandList hands = frame.hands();
-  for (HandList::const_iterator hl = hands.begin(); hl != hands.end(); ++hl) {
-    // Get the first hand
-    const Hand hand = *hl;
-    std::string handType = hand.isLeft() ? "Left hand" : "Right hand";
-	//::SetCursorPos((hand.palmPosition()[0]) * 4 + 620, 600-hand.palmPosition()[1]*1.2);
-	if (hand.palmPosition()[0]<-50)
-	{
-		num = send(NewConnection, "r\n", 4, 0);
-		printf("%d %s\n", num, "r");
+ // const Frame frame = controller.frame();
+ // //Socket
+ // WSADATA   wsaData;
+ // char   buf[1024];
+ // int   nBytes = 1024, recvbytes;
+ // SOCKET   NewConnection;
+ // SOCKADDR_IN   ServerAddr;
+ // int   Port = 8888;
+ // WSAStartup(MAKEWORD(2, 2), &wsaData);
+ // NewConnection = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+ // ServerAddr.sin_family = AF_INET;
+ // ServerAddr.sin_addr.s_addr = inet_addr("192.168.1.110 ");//手机ip地址
+ // ServerAddr.sin_port = htons(Port);
+ // printf("waiting   connect....\n");
+ // int num = connect(NewConnection, (SOCKADDR   *)&ServerAddr, sizeof(SOCKADDR_IN));
+ // 
+ // //Gets the position of my hand
+ // HandList hands = frame.hands();
+ // for (HandList::const_iterator hl = hands.begin(); hl != hands.end(); ++hl) {
+ //   // Get the first hand
+ //   const Hand hand = *hl;
+ //   std::string handType = hand.isLeft() ? "Left hand" : "Right hand";
+	////::SetCursorPos((hand.palmPosition()[0]) * 4 + 620, 600-hand.palmPosition()[1]*1.2);
+	//if (hand.palmPosition()[0]<-50)
+	//{
+	//	num = send(NewConnection, "r\n", 4, 0);
+	//	printf("%d %s\n", num, "r");
 
-	}
-	else if (hand.palmPosition()[2]>50)
-	{
-		printf("%s\n", "l");
-		num = send(NewConnection, "l\n", 4, 0);
-	}
-	else if (hand.palmPosition()[2]<-50)
-	{
-		num = send(NewConnection, "b\n", 4, 0);
-		printf("%d %s\n", num, "b");
-		
-	}
-	else if (hand.palmPosition()[2]>50)
-	{
-		printf("%s\n", "f");
-		num = send(NewConnection, "f\n", 4, 0);
-	}
-  }
+	//}
+	//else if (hand.palmPosition()[2]>50)
+	//{
+	//	printf("%s\n", "l");
+	//	num = send(NewConnection, "l\n", 4, 0);
+	//}
+	//else if (hand.palmPosition()[2]<-50)
+	//{
+	//	num = send(NewConnection, "b\n", 4, 0);
+	//	printf("%d %s\n", num, "b");
+	//	
+	//}
+	//else if (hand.palmPosition()[2]>50)
+	//{
+	//	printf("%s\n", "f");
+	//	num = send(NewConnection, "f\n", 4, 0);
+	//}
+ // }
 
-  if (!frame.hands().isEmpty() ) {
-    std::cout << std::endl;
-  }
+ // if (!frame.hands().isEmpty() ) {
+ //   std::cout << std::endl;
+ // }
 }
 
 void SampleListener::onFocusGained(const Controller& controller) {
@@ -186,15 +269,13 @@ void SampleListener::onServiceDisconnect(const Controller& controller) {
 
 int main(int argc, char** argv) {
 
-	HANDLE hThread = CreateThread(NULL, 0, Fun, NULL, 0, NULL);
-	CloseHandle(hThread);
 
   // Create a sample listener and controller
   SampleListener listener;
   Controller controller;
 
-	controller.config().setInt32("background_app_mode", 2);
-	 controller.config().save();
+  controller.config().setInt32("background_app_mode", 2);
+  controller.config().save();
 
 
   // Have the sample listener receive events from the controller
@@ -202,6 +283,13 @@ int main(int argc, char** argv) {
   controller.setPolicy(Leap::Controller::POLICY_BACKGROUND_FRAMES);
   controller.config().setInt32("background_app_mode", 2);
   controller.config().save();
+
+  HANDLE hThread = CreateThread(NULL, 0, Fun, NULL, 0, NULL);
+  CloseHandle(hThread);
+
+
+  HANDLE hThread1 = CreateThread(NULL, 0, Send, &controller, 0, NULL);
+  CloseHandle(hThread1);
 
   // Keep this process running until Enter is pressed
   std::cout << "Press Enter to quit..." << std::endl;
