@@ -2,12 +2,12 @@
 This is one of my projects of 3C lecture in SJTU. In this project, I aim to use Leap Motion to control a toy car. 
 All the things I need are: 
 
-A leap motion; 
-An android phone with camera; 
-A toy car with MSP-EXP430 and bluetooth;
-A laptop.
+>A leap motion; 
+>An android phone with camera; 
+>A toy car with MSP-EXP430 and bluetooth;
+>A laptop.
  
-Here is how it works:
+###Here is how it works:
 
 1 The mobile phone is fixed on the toy car and take videos of the road.
 
@@ -22,5 +22,8 @@ Here is how it works:
 6 The car keeps going.
 
 In fact it doesn't have to be such complex:) I just do it for fun:)
+
+###Demo
+https://youtu.be/lNxO1_AHhXg
 
 And Notice that the android app is based on the project of 肖泽云.http://download.csdn.net/detail/xwebsite/4973592 .I thank him very much. 
