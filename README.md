@@ -3,8 +3,11 @@ This is one of my projects of 3C lecture in SJTU. In this project, I aim to use 
 All the things I need are: 
 
 >A leap motion; 
+
 >An android phone with camera; 
+
 >A toy car with MSP-EXP430 and bluetooth;
+
 >A laptop.
  
 ###Here is how it works:
