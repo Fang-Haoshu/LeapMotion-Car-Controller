@@ -27,7 +27,7 @@ All the things I need are:
 In fact it doesn't have to be such complex:) I just do it for fun:)
 
 ###Demo
-You can see a demo for this project here://
+You can see a demo for this project here:
 https://youtu.be/lNxO1_AHhXg
 
 Notice that the android app is based on the project of 肖泽云.http://download.csdn.net/detail/xwebsite/4973592 .I thank him very much. 
