@@ -1,4 +1,4 @@
-# Leap-Motion-Android-Communication-by-Socket
+# LeapMotion-Car-Controller
 This is one of my projects of 3C lecture in SJTU. In this project, I aim to use Leap Motion to control a toy car. 
 All the things I need are: 
 
@@ -27,6 +27,7 @@ All the things I need are:
 In fact it doesn't have to be such complex:) I just do it for fun:)
 
 ###Demo
+You can see a demo for this project here://
 https://youtu.be/lNxO1_AHhXg
 
-And Notice that the android app is based on the project of 肖泽云.http://download.csdn.net/detail/xwebsite/4973592 .I thank him very much. 
+Notice that the android app is based on the project of 肖泽云.http://download.csdn.net/detail/xwebsite/4973592 .I thank him very much. 
