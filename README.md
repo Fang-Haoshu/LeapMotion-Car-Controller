@@ -26,6 +26,21 @@ All the things I need are:
 
 In fact it doesn't have to be such complex:) I just do it for fun:)
 
+
+###How to use it
+If you want to run this project by yourself, you need to follow the steps below:
+* 1.Download this project, make sure you have installed OpenCV on your laptop.
+* 2.Open file SampleVS2012.sln in folder /PC/LeapSDK_LFS/samples/ and check the path of *.lib and *.dll that are related to OpenCV.
+* 3.Change the ip address in the code to the ip of your phone's.
+* 4.Install the android app in folder /android app/SocketCamera/bin/
+* 5.Turn on your bluetooth and connect to your toycar. Then run this app.
+* 5.Click "setting" and change the ip address to the ip of your laptop's. Then exit the app.
+* 6.Plug your Leap Motion to the laptop and start running your VS project
+* 7.Then run the app on your phone.
+* 8.Click"Start connecting"
+* 9.Click"Start transferring"
+* 10.If everything is right, you can see the video on your monitor and the toy car will react to your hand's movement
+
 ###Demo
 You can see a demo for this project here:
 https://youtu.be/lNxO1_AHhXg
